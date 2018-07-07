@@ -3,6 +3,7 @@ package com.adamgibbs76.coderswag.Controller
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.adamgibbs76.coderswag.Adapters.CategoryAdapter
 import com.adamgibbs76.coderswag.Model.Category
 import com.adamgibbs76.coderswag.R
@@ -17,9 +18,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adapter = CategoryAdapter(this,
-                DataService. categories)
-
+        adapter = CategoryAdapter(this, DataService. categories)
         categoryListView.adapter = adapter
+
+
     }
 }
