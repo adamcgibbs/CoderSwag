@@ -11,10 +11,10 @@ import com.adamgibbs76.coderswag.Model.Product
 import com.adamgibbs76.coderswag.R
 
 
-class ProductsAdapter(val context:Context, val products: List<Product>) : RecyclerView.Adapter<ProductsAdapter.ProductHolder>() {
+class ProductsAdapter(val context:Context, val products: List<Product>, val itemClick: (Product) -> Unit) : RecyclerView.Adapter<ProductsAdapter.ProductHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_list_item, parent, false)
-        return ProductHolder(view)
+        return ProductHolder(view, itemClick)
     }
 
     override fun getItemCount(): Int {
@@ -25,7 +25,7 @@ class ProductsAdapter(val context:Context, val products: List<Product>) : Recycl
         holder.bindProduct(products[position], context)
     }
 
-    inner class ProductHolder(itemView: View?): RecyclerView.ViewHolder(itemView){
+    inner class ProductHolder(itemView: View?, val itemClick: (Product) -> Unit): RecyclerView.ViewHolder(itemView){
 
         val productImage = itemView?.findViewById<ImageView>(R.id.productImage)
         val productName = itemView?.findViewById<TextView>(R.id.productName)
@@ -36,7 +36,7 @@ class ProductsAdapter(val context:Context, val products: List<Product>) : Recycl
             productImage?.setImageResource(resourceId)
             productName?.text = product.title
             productPrice?.text = product.price
-
+            itemView.setOnClickListener { itemClick(product) }
         }
 
     }
